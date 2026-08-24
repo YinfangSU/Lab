@@ -6,7 +6,7 @@ folder="${1:-}"
 scanned=0
 flagged=0
 
-if [[-d "$folder"]]; then
+if [[ ! -d "$folder" ]]; then
     exit 3
 fi
 
