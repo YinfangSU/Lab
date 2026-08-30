@@ -22,3 +22,8 @@ log(){
     scanned=$((scanned+1))
     echo "[INFO] $*"
 }
+
+die(){
+    log "[ERROR] $1"
+    exit "$2"
+}
