@@ -23,13 +23,17 @@ fi
 
 folder="$1"
 
+# Check if the folder exists and is readable
 if [[ ! -d "$folder" || ! -r "$folder" ]]; then
-    exit 3
+    die "Folder does not exist or is not readable" 3
 fi
 
 for file in "$folder"/*.log; do
-    error_count=$(grep "ERROR" "$file" | wc -l)
-    echo "$error_count errors found in $file"
+    # In case there are no .log files, the loop will still run once with file set to the literal string "$folder/*.log"
+    [[ -f "$file" ]] || continue
+
+        error_count=$(grep "ERROR" "$file" | wc -l)
+        echo "$error_count errors found in $file"
 
 if [[ $error_count -gt 10 ]]; then
     flagged=$((flagged+1))
