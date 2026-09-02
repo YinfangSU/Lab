@@ -8,8 +8,9 @@ log(){
 }
 
 die(){
-    # $1 is the first argument passed to the function, which is the error message
-    log "[ERROR] $1"
+    # Avoid mixing INFO and ERROR, use printf to output error messages to standard error
+    # >&2 redirects the output to standard error
+    printf '[ERROR] %s\n' "$1" >&2
     # $2 is the second argument passed to the function, which is the exit code
     exit "$2"
 }
